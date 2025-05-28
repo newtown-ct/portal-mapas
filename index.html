@@ -9,9 +9,16 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
   <div class="bg-white shadow-xl rounded-xl p-6 max-w-4xl w-full mx-4">
     <div class="text-center mb-6">
-      <img src="images/town logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/150'; this.alt='Logo not found';">
+      <img src="images/town_logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/150'; this.alt='Logo not found';">
       <h1 class="text-2xl font-bold text-gray-800">Newtown Map Portal</h1>
       <p class="text-gray-600 text-sm mt-1">Access the available GIS web applications:</p>
+    </div>
+    <div class="text-left mb-6">
+      <p class="text-gray-800 text-sm">TOWN OF NEWTOWN CONNECTICUT</p>
+      <p class="text-gray-800 text-sm">Geographic & Property Information Network</p>
+      <p class="text-gray-800 text-sm">3 Primrose Street</p>
+      <p class="text-gray-800 text-sm">Newtown, CT 06470</p>
+      <p class="text-gray-800 text-sm">ph (203) 270-4270</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <a href="https://workorder.mapxpress.net/newtown/" target="_blank" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition">
@@ -22,22 +29,105 @@
         <h2 class="text-lg font-semibold text-blue-700">GIS Town Maps</h2>
         <p class="text-gray-600 text-sm">Explore cadastral information and address points in Newtown’s Interactive GIS.</p>
       </a>
-      <a href="https://link-to-datadownloads.com" target="_blank" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition">
-        <h2 class="text-lg font-semibold text-blue-700">GIS Data Downloads</h2>
-        <p class="text-gray-600 text-sm">Access GIS data provided by the Town of Newtown, CT.</p>
-      </a>
-      <a href="https://link-to-mapgallery.com" target="_blank" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition">
+      <div onclick="toggleMapGallery()" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">Town Map Gallery</h2>
-        <p class="text-gray-600 text-sm">View information about roads, utilities, and services.</p>
-      </a>
+        <p class="text-gray-600 text-sm">Download PDF maps of Newtown, CT.</p>
+      </div>
+      <div onclick="toggleGisLinks()" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
+        <h2 class="text-lg font-semibold text-blue-700">GIS Data Downloads</h2>
+        <p class="text-gray-600 text-sm">Access GIS data resources for Newtown, CT.</p>
+      </div>
     </div>
-    <div class="text-left mt-6">
-      <p class="text-gray-800 text-sm">TOWN OF NEWTOWN CONNECTICUT</p>
-      <p class="text-gray-800 text-sm">Geographic & Property Information Network</p>
-      <p class="text-gray-800 text-sm">3 Primrose Street</p>
-      <p class="text-gray-800 text-sm">Newtown, CT 06470</p>
-      <p class="text-gray-800 text-sm">ph (203) 270-4270</p>
+    <div id="gis-links" class="hidden mt-4">
+      <div class="grid grid-cols-1 gap-4">
+        <a href="https://magic.lib.uconn.edu/" target="_blank" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition">
+          <h3 class="text-lg font-semibold text-blue-700">UCONN Map and Geographic Information Center</h3>
+          <p class="text-gray-600 text-sm">Available data: Aerial Photography, Education & Outreach, Maps and Mash-ups, GIS data...</p>
+        </a>
+        <a href="https://clear.uconn.edu/" target="_blank" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition">
+          <h3 class="text-lg font-semibold text-blue-700">Center for Land Use Education & Research</h3>
+          <p class="text-gray-600 text-sm">Available data: Aerial Photography, LIDAR, Watershed Maps, Land Cover, Riparian Corridors...</p>
+        </a>
+        <a href="https://portal.ct.gov/deep/" target="_blank" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition">
+          <h3 class="text-lg font-semibold text-blue-700">CT Department of Environmental Protection</h3>
+          <p class="text-gray-600 text-sm">Available data: Aerial Photography, Geology, Political Boundaries, Elevation Data, Bathymetry...</p>
+        </a>
+      </div>
+    </div>
+    <div id="map-gallery" class="hidden mt-4">
+      <div class="grid grid-cols-1 gap-4">
+        <div class="border border-gray-200 rounded-lg p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-blue-700">Open Space Map</h3>
+              <p class="text-gray-600 text-sm">The Open Space Map was prepared for Date Revised:</p>
+            </div>
+            <div class="flex items-center space-x-4">
+              <img src="https://via.placeholder.com/40" alt="Open Space Map Thumbnail" class="h-10 w-10">
+              <a href="/maps/open_space_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
+                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
+                <span class="text-sm">Download (1.2 MB)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-blue-700">Street Index Map</h3>
+              <p class="text-gray-600 text-sm">The Street Index Map was prepared for Date Revised:</p>
+            </div>
+            <div class="flex items-center space-x-4">
+              <img src="https://via.placeholder.com/40" alt="Street Index Map Thumbnail" class="h-10 w-10">
+              <a href="/maps/street_index_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
+                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
+                <span class="text-sm">Download (1.5 MB)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-blue-700">Zip Codes Map</h3>
+              <p class="text-gray-600 text-sm">The Zip Code Map was prepared for Date Revised:</p>
+            </div>
+            <div class="flex items-center space-x-4">
+              <img src="https://via.placeholder.com/40" alt="Zip Codes Map Thumbnail" class="h-10 w-10">
+              <a href="/maps/zip_codes_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
+                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
+                <span class="text-sm">Download (1.0 MB)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-blue-700">Zoning Map</h3>
+              <p class="text-gray-600 text-sm">The Zoning Map was prepared for Date Revised:</p>
+            </div>
+            <div class="flex items-center space-x-4">
+              <img src="https://via.placeholder.com/40" alt="Zoning Map Thumbnail" class="h-10 w-10">
+              <a href="/maps/zoning_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
+                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
+                <span class="text-sm">Download (1.3 MB)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <script>
+    function toggleGisLinks() {
+      const gisLinks = document.getElementById('gis-links');
+      gisLinks.classList.toggle('hidden');
+    }
+    function toggleMapGallery() {
+      const mapGallery = document.getElementById('map-gallery');
+      mapGallery.classList.toggle('hidden');
+    }
+  </script>
 </body>
 </html>
