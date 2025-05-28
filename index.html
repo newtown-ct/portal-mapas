@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,25 +19,27 @@
         <h2 class="text-lg font-semibold text-blue-700">Public Works Service Request</h2>
         <p class="text-gray-600 text-sm">Submit and monitor public works service requests for Newtown, CT. Requests are processed immediately.</p>
       </a>
-      <a href="https://westcogct.mapgeo.io/datasets/properties?abuttersDistance=100&latlng=41.298093%2C-73.503768" target="_blank" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition">
+      <a href="https://westcogct.mapgeo.io/datasets/properties?abuttersDistance=100&latlng=41.298093%2C-73.503768" target="_blank" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition" id="gis-town-maps-link">
         <h2 class="text-lg font-semibold text-blue-700">GIS Town Maps</h2>
-        <p class="text-gray-600 text-sm">Explore cadastral information and address points in Newtown’s Interactive GIS.</p>
+        <p class="text-gray-600 text-sm">Explore cadastral information and address points in Newtown's Interactive GIS.</p>
+        <p id="gis-town-maps-counter" class="hidden text-xs text-gray-500 mt-1">Accessed <span id="gis-town-maps-count">0</span> times</p>
       </a>
       <div onclick="toggleSection('map-gallery')" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">Town Map Gallery</h2>
         <p class="text-gray-600 text-sm">Download PDF maps of Newtown, CT.</p>
       </div>
-      <div onclick="toggleSection('gis-links')" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
-        <h2 class="text-lg font-semibold text-blue-700">Others GIS Data Downloads</h2>
-        <p class="text-gray-600 text-sm">Access GIS data resources for Newtown, CT.</p>
-      </div>
-      <a href="https://newtown.mapxpress.net/" target="_blank" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition">
-        <h2 class="text-lg font-semibold text-blue-700">Legacy GIS Website</h2>
-        <p class="text-gray-600 text-sm">Access the old interface here, which will be available until October 31, 2025.</p>
-      </a>
       <div onclick="toggleSection('staff-contact')" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">Staff Contact</h2>
         <p class="text-gray-600 text-sm">Contact us here.</p>
+      </div>
+      <a href="https://newtown.mapxpress.net/" target="_blank" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition">
+        <h2 class="text-lg font-semibold text-blue-700">Legacy GIS Website</h2>
+        <p class="text-gray-600 text-sm">Access the old interface here, which will be available until August 31, 2025.</p>
+      </a>
+      <div onclick="toggleSection('gis-links')" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
+        <h2 class="text-lg font-semibold text-blue-700">Download Others GIS Sources</h2>
+        <p class="text-gray-600 text-sm">Access GIS data resources for Newtown, CT.</p>
+        <p id="gis-links-counter" class="hidden text-xs text-gray-500 mt-1">Accessed <span id="gis-links-count">0</span> times</p>
       </div>
     </div>
     <div id="gis-links" class="hidden mt-4">
@@ -135,6 +138,13 @@
   </div>
   <script>
     let currentSection = null;
+    // Initialize counters from localStorage or set to 0 if not exists
+    let gisTownMapsCount = localStorage.getItem('gisTownMapsCount') || 0;
+    let gisLinksCount = localStorage.getItem('gisLinksCount') || 0;
+
+    // Update counter displays
+    document.getElementById('gis-town-maps-count').textContent = gisTownMapsCount;
+    document.getElementById('gis-links-count').textContent = gisLinksCount;
 
     function toggleSection(sectionId) {
       const sections = ['gis-links', 'map-gallery', 'staff-contact'];
@@ -158,7 +168,23 @@
       // Open the clicked section
       targetSection.classList.remove('hidden');
       currentSection = sectionId;
+
+      // Update counters when specific sections are opened
+      if (sectionId === 'gis-links') {
+        gisLinksCount++;
+        localStorage.setItem('gisLinksCount', gisLinksCount);
+        document.getElementById('gis-links-count').textContent = gisLinksCount;
+        document.getElementById('gis-links-counter').classList.remove('hidden');
+      }
     }
+
+    // Track clicks on GIS Town Maps link
+    document.getElementById('gis-town-maps-link').addEventListener('click', function() {
+      gisTownMapsCount++;
+      localStorage.setItem('gisTownMapsCount', gisTownMapsCount);
+      document.getElementById('gis-town-maps-count').textContent = gisTownMapsCount;
+      document.getElementById('gis-town-maps-counter').classList.remove('hidden');
+    });
   </script>
 </body>
 </html>
