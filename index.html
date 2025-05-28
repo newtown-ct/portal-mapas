@@ -9,7 +9,7 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
   <div class="bg-white shadow-xl rounded-xl p-6 max-w-4xl w-full mx-4">
     <div class="text-center mb-6">
-      <img src="images/town_logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/150'; this.alt='Error'">
+      <img src="images/town logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/150'; this.alt='Error'">
       <h1 class="text-2xl font-bold text-gray-800">Newtown Map Portal</h1>
       <p class="text-gray-600 text-sm mt-1">Access the available GIS web applications:</p>
     </div>
@@ -85,7 +85,7 @@
           <div class="flex items-center justify-between">
             <div>
               <h3 class="text-lg font-semibold text-blue-700">Zip Codes Map</h3>
-              <p class="text-gray-600 text-sm">The Zip Code Map was prepared for Date Revised:</p>
+              <p class="text-gray-600 text-sm">The Zip Code Map was prepared for.</p>
             </div>
             <div>
               <a href="/maps/zip_codes_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
@@ -99,12 +99,12 @@
           <div class="flex items-center justify-between">
             <div>
               <h3 class="text-lg font-semibold text-blue-700">Zoning Map</h3>
-              <p class="text-gray-600 text-sm">The Zoning Map was prepared for Date Revised:</p>
+              <p class="text-gray-600 text-sm">The Zoning Map was prepared for.</p>
             </div>
             <div>
               <a href="/maps/zoning_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
-                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
-                <span class="text-sm">Download (1.3 MB)</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-4">
+                <span class="text-sm">Download (1.4 MB)</span>
               </a>
             </div>
           </div>
@@ -130,24 +130,30 @@
     </div>
   </div>
   <script>
+    let currentSection = null;
+
     function toggleSection(sectionId) {
-      // List of all toggleable section IDs
       const sections = ['gis-links', 'map-gallery', 'staff-contact'];
-      
+      const targetSection = document.getElementById(sectionId);
+
+      if (!targetSection) return;
+
+      // If the clicked section is already open, close it
+      if (currentSection === sectionId) {
+        targetSection.classList.add('hidden');
+        currentSection = null;
+        return;
+      }
+
       // Close all sections
       sections.forEach(id => {
         const section = document.getElementById(id);
         if (section) section.classList.add('hidden');
       });
-      
-      // Toggle the clicked section (open if closed, close if open)
-      const targetSection = document.getElementById(sectionId);
-      if (targetSection) {
-        // Only toggle if it was hidden (to open it), or do nothing if already open (it’s now closed)
-        if (targetSection.classList.contains('hidden')) {
-          targetSection.classList.remove('hidden');
-        }
-      }
+
+      // Open the clicked section
+      targetSection.classList.remove('hidden');
+      currentSection = sectionId;
     }
   </script>
 </body>
