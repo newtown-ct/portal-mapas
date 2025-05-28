@@ -9,7 +9,7 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
   <div class="bg-white shadow-xl rounded-xl p-6 max-w-4xl w-full mx-4">
     <div class="text-center mb-6">
-      <img src="images/town logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/150'; this.alt='Logo not found';">
+      <img src="images/town_logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/150'; this.alt='Error'">
       <h1 class="text-2xl font-bold text-gray-800">Newtown Map Portal</h1>
       <p class="text-gray-600 text-sm mt-1">Access the available GIS web applications:</p>
     </div>
@@ -22,15 +22,15 @@
         <h2 class="text-lg font-semibold text-blue-700">GIS Town Maps</h2>
         <p class="text-gray-600 text-sm">Explore cadastral information and address points in Newtown’s Interactive GIS.</p>
       </a>
-      <div onclick="toggleMapGallery()" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
+      <div onclick="toggleSection('map-gallery')" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">Town Map Gallery</h2>
         <p class="text-gray-600 text-sm">Download PDF maps of Newtown, CT.</p>
       </div>
-      <div onclick="toggleGisLinks()" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
+      <div onclick="toggleSection('gis-links')" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">GIS Data Downloads</h2>
         <p class="text-gray-600 text-sm">Access GIS data resources for Newtown, CT.</p>
       </div>
-      <div onclick="toggleStaffContact()" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
+      <div onclick="toggleSection('staff-contact')" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">Staff Contact</h2>
         <p class="text-gray-600 text-sm">Contact us here.</p>
       </div>
@@ -59,8 +59,7 @@
               <h3 class="text-lg font-semibold text-blue-700">Open Space Map</h3>
               <p class="text-gray-600 text-sm">The Open Space Map was prepared for Date Revised:</p>
             </div>
-            <div class="flex items-center space-x-4">
-              <img src="https://via.placeholder.com/40" alt="Open Space Map Thumbnail" class="h-10 w-10">
+            <div>
               <a href="/maps/open_space_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
                 <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
                 <span class="text-sm">Download (1.2 MB)</span>
@@ -74,8 +73,7 @@
               <h3 class="text-lg font-semibold text-blue-700">Street Index Map</h3>
               <p class="text-gray-600 text-sm">The Street Index Map was prepared for Date Revised:</p>
             </div>
-            <div class="flex items-center space-x-4">
-              <img src="https://via.placeholder.com/40" alt="Street Index Map Thumbnail" class="h-10 w-10">
+            <div>
               <a href="/maps/street_index_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
                 <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
                 <span class="text-sm">Download (1.5 MB)</span>
@@ -89,8 +87,7 @@
               <h3 class="text-lg font-semibold text-blue-700">Zip Codes Map</h3>
               <p class="text-gray-600 text-sm">The Zip Code Map was prepared for Date Revised:</p>
             </div>
-            <div class="flex items-center space-x-4">
-              <img src="https://via.placeholder.com/40" alt="Zip Codes Map Thumbnail" class="h-10 w-10">
+            <div>
               <a href="/maps/zip_codes_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
                 <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
                 <span class="text-sm">Download (1.0 MB)</span>
@@ -104,8 +101,7 @@
               <h3 class="text-lg font-semibold text-blue-700">Zoning Map</h3>
               <p class="text-gray-600 text-sm">The Zoning Map was prepared for Date Revised:</p>
             </div>
-            <div class="flex items-center space-x-4">
-              <img src="https://via.placeholder.com/40" alt="Zoning Map Thumbnail" class="h-10 w-10">
+            <div>
               <a href="/maps/zoning_map.pdf" download class="flex items-center text-blue-600 hover:text-blue-800">
                 <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF Icon" class="h-6 w-6 mr-1">
                 <span class="text-sm">Download (1.3 MB)</span>
@@ -134,17 +130,24 @@
     </div>
   </div>
   <script>
-    function toggleGisLinks() {
-      const gisLinks = document.getElementById('gis-links');
-      gisLinks.classList.toggle('hidden');
-    }
-    function toggleMapGallery() {
-      const mapGallery = document.getElementById('map-gallery');
-      mapGallery.classList.toggle('hidden');
-    }
-    function toggleStaffContact() {
-      const staffContact = document.getElementById('staff-contact');
-      staffContact.classList.toggle('hidden');
+    function toggleSection(sectionId) {
+      // List of all toggleable section IDs
+      const sections = ['gis-links', 'map-gallery', 'staff-contact'];
+      
+      // Close all sections
+      sections.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) section.classList.add('hidden');
+      });
+      
+      // Toggle the clicked section (open if closed, close if open)
+      const targetSection = document.getElementById(sectionId);
+      if (targetSection) {
+        // Only toggle if it was hidden (to open it), or do nothing if already open (it’s now closed)
+        if (targetSection.classList.contains('hidden')) {
+          targetSection.classList.remove('hidden');
+        }
+      }
     }
   </script>
 </body>
