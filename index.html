@@ -9,7 +9,7 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
   <div class="bg-white shadow-xl rounded-xl p-6 max-w-4xl w-full mx-4">
     <div class="text-center mb-6">
-      <img src="images/town logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/150'; this.alt='Logo not found';">
+      <img src="images/town_logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/150'; this.alt='Logo not found';">
       <h1 class="text-2xl font-bold text-gray-800">Newtown Map Portal</h1>
       <p class="text-gray-600 text-sm mt-1">Access the available GIS web applications:</p>
     </div>
@@ -29,6 +29,10 @@
       <div onclick="toggleGisLinks()" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">GIS Data Downloads</h2>
         <p class="text-gray-600 text-sm">Access GIS data resources for Newtown, CT.</p>
+      </div>
+      <div onclick="toggleStaffContact()" class="border border-gray-200 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
+        <h2 class="text-lg font-semibold text-blue-700">Staff Contact</h2>
+        <p class="text-gray-600 text-sm">Contact us here.</p>
       </div>
     </div>
     <div id="gis-links" class="hidden mt-4">
@@ -111,23 +115,21 @@
         </div>
       </div>
     </div>
-    <div class="mt-6 flex flex-col md:flex-row gap-4">
-      <div class="flex-1 text-left">
-        <p class="text-gray-800 text-sm">TOWN OF NEWTOWN CONNECTICUT</p>
-        <p class="text-gray-800 text-sm">Geographic & Property Information Network</p>
-        <p class="text-gray-800 text-sm">3 Primrose Street</p>
-        <p class="text-gray-800 text-sm">Newtown, CT 06470</p>
-        <p class="text-gray-800 text-sm">ph (203) 270-4270</p>
-      </div>
-      <div class="flex-1 border border-gray-200 rounded-lg p-4">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Contact</h3>
-        <p class="text-gray-800 text-sm font-semibold">Technology and GIS Dept.</p>
-        <p class="text-gray-600 text-sm">Phone: (203) 270-4270</p>
-        <p class="text-gray-600 text-sm">Email: <a href="mailto:technology.gis@newtown-ct.gov" class="text-blue-600 hover:text-blue-800">technology.gis@newtown-ct.gov</a></p>
-        <p class="text-gray-800 text-sm font-semibold mt-4">Assessor's Office</p>
-        <p class="text-gray-600 text-sm">Sarah Carey</p>
-        <p class="text-gray-600 text-sm">Phone: (203) 270-4240</p>
-        <p class="text-gray-600 text-sm">Email: <a href="mailto:sarah.carey@newtown-ct.gov" class="text-blue-600 hover:text-blue-800">sarah.carey@newtown-ct.gov</a></p>
+    <div id="staff-contact" class="hidden mt-4">
+      <div class="grid grid-cols-1 gap-4">
+        <div class="border border-gray-200 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-blue-700">Technology and GIS Dept.</h3>
+          <p class="text-gray-600 text-sm">3 Primrose Street</p>
+          <p class="text-gray-600 text-sm">Newtown, CT 06470</p>
+          <p class="text-gray-600 text-sm">Phone: (203) 270-4270</p>
+          <p class="text-gray-600 text-sm">Email: <a href="mailto:technology.gis@newtown-ct.gov" class="text-blue-600 hover:text-blue-800">technology.gis@newtown-ct.gov</a></p>
+        </div>
+        <div class="border border-gray-200 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-blue-700">Assessor's Office</h3>
+          <p class="text-gray-600 text-sm">Sarah Carey</p>
+          <p class="text-gray-600 text-sm">Phone: (203) 270-4240</p>
+          <p class="text-gray-600 text-sm">Email: <a href="mailto:sarah.carey@newtown-ct.gov" class="text-blue-600 hover:text-blue-800">sarah.carey@newtown-ct.gov</a></p>
+        </div>
       </div>
     </div>
   </div>
@@ -139,6 +141,10 @@
     function toggleMapGallery() {
       const mapGallery = document.getElementById('map-gallery');
       mapGallery.classList.toggle('hidden');
+    }
+    function toggleStaffContact() {
+      const staffContact = document.getElementById('staff-contact');
+      staffContact.classList.toggle('hidden');
     }
   </script>
 </body>
