@@ -10,7 +10,7 @@
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
   <div class="bg-white shadow-xl rounded-xl p-6 max-w-4xl w-full mx-4">
     <div class="text-center mb-6">
-      <img src="images/town_logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/512'; this.alt='Error'">
+      <img src="images/town logo.jpg" alt="Town of Newtown Connecticut Logo" class="mx-auto h-20 mb-3" onerror="this.src='https://via.placeholder.com/512'; this.alt='Error'">
       <h1 class="text-2xl font-bold text-gray-800">Newtown Map Portal</h1>
       <p class="text-gray-600 text-sm mt-1">Access the available GIS web applications:</p>
     </div>
@@ -22,8 +22,8 @@
       <a href="https://westcogct.mapgeo.io/datasets/properties?abuttersDistance=100&latlng=41.298093%2C-73.503768" target="_blank" id="gis-town-maps" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition">
         <h2 class="text-lg font-semibold text-blue-700">GIS Town Maps</h2>
         <p class="text-gray-600 text-sm">Explore cadastral information and address points in Newtown’s Interactive GIS.</p>
+        <p id="gis-town-maps-counter" class="text-sm text-gray-600 mt-2 hidden">Accesses: <span id="gis-town-maps-count">0</span></p>
       </a>
-      <p id="gis-town-maps-counter" class="text-sm text-gray-600 hidden col-span-1 sm:col-start-2 sm:col-end-2">Accesses: <span id="gis-town-maps-count">0</span></p>
       <div onclick="toggleSection('map-gallery')" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">Town Map Gallery</h2>
         <p class="text-gray-600 text-sm">Download PDF maps of Newtown, CT.</p>
@@ -31,15 +31,16 @@
       <div onclick="toggleSection('download-others')" id="download-others-box" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">Download Others GIS Sources</h2>
         <p class="text-gray-600 text-sm">Access external GIS data resources.</p>
+        <p id="download-others-counter" class="text-sm text-gray-600 mt-2 hidden">Accesses: <span id="download-others-count">0</span></p>
       </div>
-      <p id="download-others-counter" class="text-sm text-gray-600 hidden col-span-1 sm:col-start-2 sm:col-end-2">Accesses: <span id="download-others-count">0</span></p>
       <div onclick="toggleSection('staff-contact')" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition cursor-pointer">
         <h2 class="text-lg font-semibold text-blue-700">Staff Contact</h2>
         <p class="text-gray-600 text-sm">Contact us here.</p>
       </div>
-      <a href="https://newtown.mapxpress.net/" target="_blank" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition">
+      <a href="https://newtown.mapxpress.net/" target="_blank" id="legacy-gis-website" class="border border-gray-600 rounded-lg p-4 hover:bg-blue-50 transition">
         <h2 class="text-lg font-semibold text-blue-700">Legacy GIS Website</h2>
         <p class="text-gray-600 text-sm">Access the old interface here, which will be available until August 31, 2025.</p>
+        <p id="legacy-gis-counter" class="text-sm text-gray-600 mt-2 hidden">Accesses: <span id="legacy-gis-count">0</span></p>
       </a>
     </div>
     <div id="download-others" class="hidden mt-4">
@@ -142,10 +143,12 @@
     // Initialize counters from localStorage or set to 0
     let gisTownMapsCount = parseInt(localStorage.getItem('gisTownMapsCount')) || 0;
     let downloadOthersCount = parseInt(localStorage.getItem('downloadOthersCount')) || 0;
+    let legacyGisCount = parseInt(localStorage.getItem('legacyGisCount')) || 0;
 
     // Update counter displays
     document.getElementById('gis-town-maps-count').textContent = gisTownMapsCount;
     document.getElementById('download-others-count').textContent = downloadOthersCount;
+    document.getElementById('legacy-gis-count').textContent = legacyGisCount;
 
     // Show counters if they've been accessed before
     if (gisTownMapsCount > 0) {
@@ -153,6 +156,9 @@
     }
     if (downloadOthersCount > 0) {
       document.getElementById('download-others-counter').classList.remove('hidden');
+    }
+    if (legacyGisCount > 0) {
+      document.getElementById('legacy-gis-counter').classList.remove('hidden');
     }
 
     // Counter for GIS Town Maps (direct link)
@@ -171,6 +177,14 @@
         document.getElementById('download-others-count').textContent = downloadOthersCount;
         document.getElementById('download-others-counter').classList.remove('hidden');
       }
+    });
+
+    // Counter for Legacy GIS Website (direct link)
+    document.getElementById('legacy-gis-website').addEventListener('click', () => {
+      legacyGisCount++;
+      localStorage.setItem('legacyGisCount', legacyGisCount);
+      document.getElementById('legacy-gis-count').textContent = legacyGisCount;
+      document.getElementById('legacy-gis-counter').classList.remove('hidden');
     });
 
     function toggleSection(sectionId) {
